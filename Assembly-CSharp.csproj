@@ -6,7 +6,7 @@
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <RootNamespace></RootNamespace>
-    <ProjectGuid>{838ECA7A-340A-849B-65B5-5E2D8385BD5E}</ProjectGuid>
+    <ProjectGuid>{6DA3E224-5D29-5159-0885-6BACFF66EA1A}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <AssemblyName>Assembly-CSharp</AssemblyName>
@@ -49,6 +49,9 @@
      <Compile Include="Assets\Scripts\Game\Pusher.cs" />
      <Compile Include="Assets\Scripts\Game\Robo.cs" />
      <Compile Include="Assets\Scripts\Game\Scientist.cs" />
+     <Compile Include="Assets\Scripts\Game\Slow.cs" />
+     <Compile Include="Assets\Scripts\Game\Stun.cs" />
+     <Compile Include="Assets\Scripts\sceneManager.cs" />
  <Reference Include="UnityEngine.UI">
  <HintPath>C:/Unity 5/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
  </Reference>

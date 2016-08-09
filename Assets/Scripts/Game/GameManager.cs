@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour 
 {
@@ -14,10 +15,14 @@ public class GameManager : MonoBehaviour
 	int points;
 	bool started;
 
+	public Image tooltip;
+	public Text textName, textDesc, textCost;
+
 	public enum mouseState
 	{
 		NONE,
 		PUSHER,
+		SLOW,
 		STUN
 	};
 	mouseState state = mouseState.NONE;
@@ -34,6 +39,9 @@ public class GameManager : MonoBehaviour
 		if (started)
 		{
 			Game ();
+
+			if (time < 0)
+				SceneManager.LoadScene ("Fase 2");
 		}
 		else 
 		{
@@ -43,21 +51,27 @@ public class GameManager : MonoBehaviour
 
 	public void setPusher()
 	{
-		if (points >= 10)
+		if (points >= 15)
 		this.state = mouseState.PUSHER;
+	}
+
+	public void setSlow()
+	{
+		if (points >= 10)
+		this.state = mouseState.SLOW;
 	}
 
 	public void setStun()
 	{
-		if (points >= 15)
-		this.state = mouseState.STUN;
+		if (points >= 20)
+			this.state = mouseState.STUN;
 	}
 
 	public void StartGame()
 	{
 		started = true;
 		Instantiate (scientist, new Vector3 (-9, -3, 0), Quaternion.identity);
-		this.time = 30;
+		this.time = 5;
 		this.timeBar.minValue = 0;
 		this.timeBar.maxValue = time;
 		this.timeBar.value = time;
@@ -76,6 +90,9 @@ public class GameManager : MonoBehaviour
 		this.objectPosition = Camera.main.ScreenToWorldPoint (mousePosition);
 		this.pointText.text = "Points: " + points.ToString ();
 
+		if (tooltip != null)
+			tooltip.transform.position = new Vector2(mousePosition.x + tooltip.GetComponent<RectTransform>().rect.width/2 + 10, mousePosition.y - tooltip.GetComponent<RectTransform>().rect.height/2 - 10);
+
 		switch (this.state) 
 		{
 		case mouseState.NONE:
@@ -86,19 +103,38 @@ public class GameManager : MonoBehaviour
 			if (Input.GetMouseButtonDown (0)) 
 			{
 				Instantiate (robo [0], new Vector3 (objectPosition.x, objectPosition.y, 0), Quaternion.identity);
+				points -= 15;
+				this.state = mouseState.NONE;
+			}
+			break;
+		case mouseState.SLOW:
+			Cursor.SetCursor(cursorTexture[1], Vector2.zero, CursorMode.Auto);
+			if (Input.GetMouseButtonDown (0)) 
+			{
+				Instantiate (robo [1], new Vector3 (objectPosition.x, objectPosition.y, 0), Quaternion.identity);
 				points -= 10;
 				this.state = mouseState.NONE;
 			}
 			break;
 		case mouseState.STUN:
-			Cursor.SetCursor(cursorTexture[1], Vector2.zero, CursorMode.Auto);
+			Cursor.SetCursor(cursorTexture[2], Vector2.zero, CursorMode.Auto);
 			if (Input.GetMouseButtonDown (0)) 
 			{
-				Instantiate (robo [1], new Vector3 (objectPosition.x, objectPosition.y, 0), Quaternion.identity);
-				points -= 15;
+				Instantiate (robo [2], new Vector3 (objectPosition.x, objectPosition.y, 0), Quaternion.identity);
+				points -= 20;
 				this.state = mouseState.NONE;
 			}
 			break;
+		}
+	}
+
+	public void tooltipEnter(GameObject r)
+	{
+		if (this.state == mouseState.NONE) 
+		{
+			textName.text = r.name;
+			textDesc.text = r.GetComponent<Robo> ().description;
+			textCost.text = "Cost: " + r.GetComponent<Robo> ().cost.ToString ();
 		}
 	}
 

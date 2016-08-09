@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.SceneManagement;
 
 public class Scientist : MonoBehaviour
 {
@@ -20,5 +21,13 @@ public class Scientist : MonoBehaviour
 		if (walking)
 			this.transform.position = Vector2.MoveTowards(this.transform.position, new Vector3(GameObject.Find("Exit").transform.position.x, this.transform.position.y, 0), 0.01f);
 		//this.transform.position = Vector3.Lerp(this.transform.position, new Vector3(GameObject.Find("Exit").transform.position.x, this.transform.position.y, 0), 0.0018f);
+	}
+
+	void OnCollisionEnter2D(Collision2D c)
+	{
+		if (c.gameObject.tag.Equals ("exit")) 
+		{
+			SceneManager.LoadScene ("Menu");			
+		}				
 	}
 }

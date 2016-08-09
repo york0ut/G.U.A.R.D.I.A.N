@@ -9,6 +9,8 @@ public class Pusher : Robo
 	{
 		this.audioSource = gameObject.AddComponent<AudioSource>();
 		this.cooldown = 10;
+		this.cost = 15;
+		this.description = "Robô que empurra";
 		//audioSource.clip = Resources.Load("Sounds/1") as AudioClip;	
 	}
 
