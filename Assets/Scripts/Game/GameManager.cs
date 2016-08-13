@@ -71,7 +71,7 @@ public class GameManager : MonoBehaviour
 	{
 		started = true;
 		Instantiate (scientist, new Vector3 (-9, -3, 0), Quaternion.identity);
-		this.time = 5;
+		this.time = 15;
 		this.timeBar.minValue = 0;
 		this.timeBar.maxValue = time;
 		this.timeBar.value = time;

@@ -1,27 +1,42 @@
 ﻿using UnityEngine;
-using System.Collections;
 using UnityEngine.SceneManagement;
 
 public class Scientist : MonoBehaviour
 {
-	bool walking;
+    public float speed = 0.05f;
+    bool walking;
+
+    private Transform target;
+    private int waypointIndex = 0;
 
 	void Start()
 	{
 		this.walking = true;
+        target = Waypoints.points[0];
 	}
 
-	void FixedUpdate()
-	{
-		if (Input.GetKeyDown (KeyCode.Space)) 
-		{
-			//this
-		}	
+    void Update()
+    {
+        Vector2 dir = target.position - transform.position;
+        transform.Translate(dir.normalized * speed * Time.deltaTime);
 
-		if (walking)
-			this.transform.position = Vector2.MoveTowards(this.transform.position, new Vector3(GameObject.Find("Exit").transform.position.x, this.transform.position.y, 0), 0.01f);
-		//this.transform.position = Vector3.Lerp(this.transform.position, new Vector3(GameObject.Find("Exit").transform.position.x, this.transform.position.y, 0), 0.0018f);
-	}
+        if(Vector2.Distance(transform.position, target.position) <= 0.02f)
+        {
+            GetNextWaypoint();
+            
+        }
+    }
+
+    void GetNextWaypoint()
+    {
+        if (waypointIndex >= Waypoints.points.Length - 1)
+        {
+            Destroy(gameObject);
+            return;
+        }
+        waypointIndex++;
+        target = Waypoints.points[waypointIndex];
+    }
 
 	void OnCollisionEnter2D(Collision2D c)
 	{
