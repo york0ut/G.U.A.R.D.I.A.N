@@ -51,6 +51,7 @@
      <Compile Include="Assets\Scripts\Game\Scientist.cs" />
      <Compile Include="Assets\Scripts\Game\Slow.cs" />
      <Compile Include="Assets\Scripts\Game\Stun.cs" />
+     <Compile Include="Assets\Scripts\Game\Waypoints.cs" />
      <Compile Include="Assets\Scripts\sceneManager.cs" />
  <Reference Include="UnityEngine.UI">
  <HintPath>C:/Unity 5/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>

@@ -89,40 +89,73 @@ public class GameManager : MonoBehaviour
 		this.mousePosition = Input.mousePosition;
 		this.objectPosition = Camera.main.ScreenToWorldPoint (mousePosition);
 		this.pointText.text = "Points: " + points.ToString ();
-
 		if (tooltip != null)
 			tooltip.transform.position = new Vector2(mousePosition.x + tooltip.GetComponent<RectTransform>().rect.width/2 + 10, mousePosition.y - tooltip.GetComponent<RectTransform>().rect.height/2 - 10);
 
+		print (objectPosition.y);
 		switch (this.state) 
 		{
 		case mouseState.NONE:
 			Cursor.SetCursor(null, Vector2.zero, CursorMode.Auto);
 			break;
 		case mouseState.PUSHER:
-			Cursor.SetCursor(cursorTexture[0], Vector2.zero, CursorMode.Auto);
-			if (Input.GetMouseButtonDown (0)) 
+			if (objectPosition.x > -3 && objectPosition.x < 4.5f && objectPosition.y > -3.52f)
 			{
-				Instantiate (robo [0], new Vector3 (objectPosition.x, objectPosition.y, 0), Quaternion.identity);
-				points -= 15;
-				this.state = mouseState.NONE;
+				Cursor.SetCursor (cursorTexture [0], Vector2.zero, CursorMode.Auto);
+				if (Input.GetMouseButtonDown (0)) 
+				{
+					Instantiate (robo [0], new Vector3 (objectPosition.x, objectPosition.y, 0), Quaternion.identity);
+					points -= 15;
+					this.state = mouseState.NONE;
+				}
+			}
+			else 
+			{
+				Cursor.SetCursor (cursorTexture [3], Vector2.zero, CursorMode.Auto);
+				if (Input.GetMouseButtonDown (0)) 
+				{
+					this.state = mouseState.NONE;
+				}
 			}
 			break;
 		case mouseState.SLOW:
-			Cursor.SetCursor(cursorTexture[1], Vector2.zero, CursorMode.Auto);
-			if (Input.GetMouseButtonDown (0)) 
+			if (objectPosition.x > -3 && objectPosition.x < 4.5f && objectPosition.y > -3.52f)
 			{
-				Instantiate (robo [1], new Vector3 (objectPosition.x, objectPosition.y, 0), Quaternion.identity);
-				points -= 10;
-				this.state = mouseState.NONE;
+				Cursor.SetCursor (cursorTexture [1], Vector2.zero, CursorMode.Auto);
+				if (Input.GetMouseButtonDown (0)) 
+				{
+					Instantiate (robo [1], new Vector3 (objectPosition.x, objectPosition.y, 0), Quaternion.identity);
+					points -= 10;
+					this.state = mouseState.NONE;
+				}
+			}
+			else 
+			{
+				Cursor.SetCursor (cursorTexture [4], Vector2.zero, CursorMode.Auto);
+				if (Input.GetMouseButtonDown (0)) 
+				{
+					this.state = mouseState.NONE;
+				}
 			}
 			break;
 		case mouseState.STUN:
-			Cursor.SetCursor(cursorTexture[2], Vector2.zero, CursorMode.Auto);
-			if (Input.GetMouseButtonDown (0)) 
+			if (objectPosition.x > -3 && objectPosition.x < 4.5f && objectPosition.y > -3.52f)
 			{
-				Instantiate (robo [2], new Vector3 (objectPosition.x, objectPosition.y, 0), Quaternion.identity);
-				points -= 20;
-				this.state = mouseState.NONE;
+				Cursor.SetCursor (cursorTexture [2], Vector2.zero, CursorMode.Auto);
+				if (Input.GetMouseButtonDown (0)) 
+				{
+					Instantiate (robo [2], new Vector3 (objectPosition.x, objectPosition.y, 0), Quaternion.identity);
+					points -= 20;
+					this.state = mouseState.NONE;
+				}
+			}
+			else 
+			{
+				Cursor.SetCursor (cursorTexture [5], Vector2.zero, CursorMode.Auto);
+				if (Input.GetMouseButtonDown (0)) 
+				{
+					this.state = mouseState.NONE;
+				}
 			}
 			break;
 		}
