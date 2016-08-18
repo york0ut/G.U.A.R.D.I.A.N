@@ -40,7 +40,7 @@ public class GameManager : MonoBehaviour
 		{
 			Game ();
 
-			if (time < 0)
+			if (time < 1)
 				SceneManager.LoadScene ("Fase 2");
 		}
 		else 
@@ -71,7 +71,7 @@ public class GameManager : MonoBehaviour
 	{
 		started = true;
 		Instantiate (scientist, new Vector3 (-9, -3, 0), Quaternion.identity);
-		this.time = 15;
+		this.time = 20;
 		this.timeBar.minValue = 0;
 		this.timeBar.maxValue = time;
 		this.timeBar.value = time;
@@ -88,7 +88,7 @@ public class GameManager : MonoBehaviour
 	{
 		this.mousePosition = Input.mousePosition;
 		this.objectPosition = Camera.main.ScreenToWorldPoint (mousePosition);
-		this.pointText.text = "Points: " + points.ToString ();
+		this.pointText.text = points.ToString ();
 		if (tooltip != null)
 			tooltip.transform.position = new Vector2(mousePosition.x + tooltip.GetComponent<RectTransform>().rect.width/2 + 10, mousePosition.y - tooltip.GetComponent<RectTransform>().rect.height/2 - 10);
 

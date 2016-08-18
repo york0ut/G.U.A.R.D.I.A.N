@@ -32,8 +32,7 @@ public class Stun : Robo
 	{
 		if (c.gameObject.tag.Equals ("Scientist") && this.state == STATE.IDLE) 
 		{
-			//chama a função de stun
-			print("finge que stunou");
+			target.GetComponent<Scientist> ().setSpeed (0);
 			this.state = STATE.COOLDOWN;
 			StartCoroutine (Cooldown ());
 		}				

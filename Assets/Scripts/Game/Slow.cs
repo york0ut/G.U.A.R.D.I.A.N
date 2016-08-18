@@ -32,8 +32,7 @@ public class Slow : Robo
 	{
 		if (c.gameObject.tag.Equals ("Scientist") && this.state == STATE.IDLE) 
 		{
-			//chama a função do scientist que dá slow, reduz a velocidade dele, sei lá. 
-			print("finge que reduziu");
+			target.GetComponent<Scientist> ().setSpeed (0.005f);
 			this.state = STATE.COOLDOWN;
 			StartCoroutine (Cooldown ());
 		}				
